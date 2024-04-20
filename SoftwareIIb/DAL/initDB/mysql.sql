@@ -26,7 +26,7 @@ CREATE TABLE city (
 CREATE TABLE address (
     addressId INT(10) NOT NULL AUTO_INCREMENT,
     address VARCHAR(50) NOT NULL,
-    address2 VARCHAR(50) NOT NULL,
+    address2 VARCHAR(50),
     cityId INT(10) NOT NULL,
     postalCode VARCHAR(10) NOT NULL,
     phone VARCHAR(20) NOT NULL,

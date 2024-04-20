@@ -1,5 +1,6 @@
 namespace SoftwareIIb
 {
+    using SoftwareIIb.DAL.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -7,8 +8,9 @@ namespace SoftwareIIb
     using System.Data.Entity.Spatial;
 
     [Table("appointment")]
-    public partial class appointment
+    public partial class appointment : AModel
     {
+        [Key]
         public int appointmentId { get; set; }
 
         public int customerId { get; set; }

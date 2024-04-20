@@ -1,5 +1,6 @@
 namespace SoftwareIIb
 {
+    using SoftwareIIb.DAL.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ namespace SoftwareIIb
     using System.Data.Entity.Spatial;
 
     [Table("city")]
-    public partial class city
+    public partial class city : AModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public city()
@@ -15,6 +16,7 @@ namespace SoftwareIIb
             addresses = new HashSet<address>();
         }
 
+        [Key]
         public int cityId { get; set; }
 
         [Column("city")]
@@ -23,18 +25,6 @@ namespace SoftwareIIb
         public string city1 { get; set; }
 
         public int countryId { get; set; }
-
-        public DateTime createDate { get; set; }
-
-        [Required]
-        [StringLength(40)]
-        public string createdBy { get; set; }
-
-        public DateTime lastUpdate { get; set; }
-
-        [Required]
-        [StringLength(40)]
-        public string lastUpdateBy { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<address> addresses { get; set; }

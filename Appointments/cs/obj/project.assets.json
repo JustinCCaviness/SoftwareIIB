@@ -18621,18 +18621,18 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jcavi\\.nuget\\packages\\": {},
+    "C:\\Users\\chris\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jcavi\\source\\repos\\SoftwareIIb\\Appointments\\cs\\Appointments.csproj",
+      "projectUniqueName": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\Appointments\\cs\\Appointments.csproj",
       "projectName": "Appointments",
-      "projectPath": "C:\\Users\\jcavi\\source\\repos\\SoftwareIIb\\Appointments\\cs\\Appointments.csproj",
-      "packagesPath": "C:\\Users\\jcavi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jcavi\\source\\repos\\SoftwareIIb\\Appointments\\cs\\obj\\",
+      "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\Appointments\\cs\\Appointments.csproj",
+      "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\Appointments\\cs\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -18640,7 +18640,7 @@
         "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\jcavi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

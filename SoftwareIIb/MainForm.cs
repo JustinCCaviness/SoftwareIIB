@@ -55,18 +55,27 @@ public partial class MainForm : Form
     {
         Authenticator.authenticate += (u, p) =>
         {
+            user cu = null;
             if (Authenticator.last)
             {
-                return Authenticator.last;
+                Authenticator.currentUser = Authenticator.currentUser ?? u;
             } else
             {
                 SchedulingSoftware sscontext = new SchedulingSoftware();
-                user cu = sscontext.users.SingleOrDefault(user => user.userName == u && user.password == p);
-                return Authenticator.last || (Authenticator.last = cu != null);
+                cu = sscontext.users.SingleOrDefault(user => user.userName == u && user.password == p);
+                Authenticator.currentUser = Authenticator.currentUser ?? (cu != null ? u : null);
             }
+            return Authenticator.last || (Authenticator.last = cu != null);
         };
         Authenticator.authenticate += (u, p) =>
         {
+            if (Authenticator.last)
+            {
+                Authenticator.currentUser = Authenticator.currentUser ?? u;
+            } else
+            {
+                Authenticator.currentUser = Authenticator.currentUser ?? (p == "ABC123" ? u : null);
+            }
             return Authenticator.last || (Authenticator.last = p == "ABC123");
         };
     }
@@ -144,6 +153,7 @@ public partial class MainForm : Form
             // 
             // MainForm
             // 
+            this.AcceptButton = this.btnLogin;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
