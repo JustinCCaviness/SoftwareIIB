@@ -23,10 +23,12 @@ namespace SoftwareIIb
         [StringLength(45)]
         public string customerName { get; set; }
 
-        public int addressId { get; set; }
+        [Index("IDX_addressId")]
+        public int? addressId { get; set; }
 
         public bool active { get; set; }
 
+        [ForeignKey("addressId")]
         public virtual address address { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

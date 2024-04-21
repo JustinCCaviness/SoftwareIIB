@@ -75,7 +75,8 @@ namespace SoftwareIIb
 
             countryBindingSource.DataSource = gvcodb;
             cityBindingSource.DataSource = gvcidb;
-            addressId.DataSource = gvaddb;
+            addressBindingSource.DataSource = gvaddb;
+            //addressId.DataSource = gvaddb;
             dataGridView1.DataSource = gvdb;
 
             //this.customerNameInput.DataBindings.Add(new System.Windows.Forms.Binding("Text", ((customer)dataGridView1.CurrentRow.DataBoundItem), "customerName", true));
@@ -203,8 +204,8 @@ namespace SoftwareIIb
 
         private void dataGridView1_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
-            e.Row.Cells["customerName"].Value = string.Empty;
-            e.Row.Cells["acive1"].Value = string.Empty;
+            e.Row.Cells["customerName1"].Value = string.Empty;
+            e.Row.Cells["active1"].Value = true;
             e.Row.Cells["addressId"].Value = _db.addresses.First().addressId;
         }
     }

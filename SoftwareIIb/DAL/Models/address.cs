@@ -27,7 +27,8 @@ namespace SoftwareIIb
         [StringLength(50)]
         public string address2 { get; set; }
 
-        public int cityId { get; set; }
+        [Index("IDX_cityId")]
+        public int? cityId { get; set; }
 
         [Required]
         [StringLength(10)]
@@ -37,6 +38,7 @@ namespace SoftwareIIb
         [StringLength(20)]
         public string phone { get; set; }
 
+        [ForeignKey("cityId")]
         public virtual city city { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

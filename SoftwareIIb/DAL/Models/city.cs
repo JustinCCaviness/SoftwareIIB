@@ -24,11 +24,13 @@ namespace SoftwareIIb
         [StringLength(50)]
         public string city1 { get; set; }
 
-        public int countryId { get; set; }
+        [Index("IDX_countryId")]
+        public int? countryId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<address> addresses { get; set; }
 
+        [ForeignKey("countryId")]
         public virtual country country { get; set; }
     }
 }

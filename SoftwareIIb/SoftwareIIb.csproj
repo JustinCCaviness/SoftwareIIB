@@ -203,6 +203,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\Configurations\MySqlDataConfiguration.cs" />
     <Compile Include="DAL\Models\address.cs" />
     <Compile Include="Authenticator.cs" />
     <Compile Include="DAL\Models\appointment.cs" />
@@ -226,6 +227,27 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DAL\dbContexts\SchedulingSoftware.cs" />
+    <Compile Include="Migrations\202404202006433_initialize.cs" />
+    <Compile Include="Migrations\202404202006433_initialize.Designer.cs">
+      <DependentUpon>202404202006433_initialize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404202156060_requiredForeignKeys.cs" />
+    <Compile Include="Migrations\202404202156060_requiredForeignKeys.Designer.cs">
+      <DependentUpon>202404202156060_requiredForeignKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404202210465_nullableForeignKeys.cs" />
+    <Compile Include="Migrations\202404202210465_nullableForeignKeys.Designer.cs">
+      <DependentUpon>202404202210465_nullableForeignKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404210005494_newIndices.cs" />
+    <Compile Include="Migrations\202404210005494_newIndices.Designer.cs">
+      <DependentUpon>202404210005494_newIndices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404210024130_addForeignKeys.cs" />
+    <Compile Include="Migrations\202404210024130_addForeignKeys.Designer.cs">
+      <DependentUpon>202404210024130_addForeignKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -264,6 +286,22 @@
     <EmbeddedResource Include="Messages.es.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404202006433_initialize.resx">
+      <DependentUpon>202404202006433_initialize.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404202156060_requiredForeignKeys.resx">
+      <DependentUpon>202404202156060_requiredForeignKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404202210465_nullableForeignKeys.resx">
+      <DependentUpon>202404202210465_nullableForeignKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404210005494_newIndices.resx">
+      <DependentUpon>202404210005494_newIndices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404210024130_addForeignKeys.resx">
+      <DependentUpon>202404210024130_addForeignKeys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

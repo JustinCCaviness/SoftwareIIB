@@ -13,9 +13,11 @@ namespace SoftwareIIb
         [Key]
         public int appointmentId { get; set; }
 
-        public int customerId { get; set; }
+        [Index("IDX_customerId")]
+        public int? customerId { get; set; }
 
-        public int userId { get; set; }
+        [Index("IDX_userId")]
+        public int? userId { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -40,20 +42,10 @@ namespace SoftwareIIb
 
         public DateTime end { get; set; }
 
-        public DateTime createDate { get; set; }
-
-        [Required]
-        [StringLength(40)]
-        public string createdBy { get; set; }
-
-        public DateTime lastUpdate { get; set; }
-
-        [Required]
-        [StringLength(40)]
-        public string lastUpdateBy { get; set; }
-
+        [ForeignKey("customerId")]
         public virtual customer customer { get; set; }
 
+        [ForeignKey("userId")]
         public virtual user user { get; set; }
     }
 }

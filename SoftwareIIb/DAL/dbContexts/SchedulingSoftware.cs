@@ -1,3 +1,5 @@
+using MySql.Data.EntityFramework;
+using SoftwareIIb.DAL.Configurations;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -5,6 +7,7 @@ using System.Linq;
 
 namespace SoftwareIIb
 {
+    [DbConfigurationType(typeof(MySqlDataConfiguration))]
     public partial class SchedulingSoftware : DbContext
     {
         //public SchedulingSoftware()
@@ -14,6 +17,7 @@ namespace SoftwareIIb
         public SchedulingSoftware()
             : base("name=MySQL")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SchedulingSoftware, Migrations.Configuration>());
         }
         public virtual DbSet<address> addresses { get; set; }
         public virtual DbSet<appointment> appointments { get; set; }
@@ -49,6 +53,8 @@ namespace SoftwareIIb
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<address>()
                 .HasMany(e => e.customers)
                 .WithRequired(e => e.address)
@@ -73,6 +79,7 @@ namespace SoftwareIIb
                 .HasMany(e => e.appointments)
                 .WithRequired(e => e.user)
                 .WillCascadeOnDelete(false);
+
         }
     }
 }
