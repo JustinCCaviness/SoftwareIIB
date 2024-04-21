@@ -203,12 +203,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="address.cs" />
+    <Compile Include="DAL\Configurations\MySqlDataConfiguration.cs" />
+    <Compile Include="DAL\Models\address.cs" />
     <Compile Include="Authenticator.cs" />
     <Compile Include="DAL\Models\appointment.cs" />
     <Compile Include="DAL\Models\city.cs" />
     <Compile Include="DAL\Models\country.cs" />
     <Compile Include="DAL\Models\customer.cs" />
+    <Compile Include="DAL\Models\AModel.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,6 +227,27 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DAL\dbContexts\SchedulingSoftware.cs" />
+    <Compile Include="Migrations\202404202006433_initialize.cs" />
+    <Compile Include="Migrations\202404202006433_initialize.Designer.cs">
+      <DependentUpon>202404202006433_initialize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404202156060_requiredForeignKeys.cs" />
+    <Compile Include="Migrations\202404202156060_requiredForeignKeys.Designer.cs">
+      <DependentUpon>202404202156060_requiredForeignKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404202210465_nullableForeignKeys.cs" />
+    <Compile Include="Migrations\202404202210465_nullableForeignKeys.Designer.cs">
+      <DependentUpon>202404202210465_nullableForeignKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404210005494_newIndices.cs" />
+    <Compile Include="Migrations\202404210005494_newIndices.Designer.cs">
+      <DependentUpon>202404210005494_newIndices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404210024130_addForeignKeys.cs" />
+    <Compile Include="Migrations\202404210024130_addForeignKeys.Designer.cs">
+      <DependentUpon>202404210024130_addForeignKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -255,6 +278,7 @@
     <Compile Include="DAL\Models\user.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -262,6 +286,22 @@
     <EmbeddedResource Include="Messages.es.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404202006433_initialize.resx">
+      <DependentUpon>202404202006433_initialize.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404202156060_requiredForeignKeys.resx">
+      <DependentUpon>202404202156060_requiredForeignKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404202210465_nullableForeignKeys.resx">
+      <DependentUpon>202404202210465_nullableForeignKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404210005494_newIndices.resx">
+      <DependentUpon>202404210005494_newIndices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404210024130_addForeignKeys.resx">
+      <DependentUpon>202404210024130_addForeignKeys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -277,6 +317,9 @@
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\address.datasource" />
+    <None Include="Properties\DataSources\city.datasource" />
+    <None Include="Properties\DataSources\country.datasource" />
     <None Include="Properties\DataSources\customer.datasource" />
     <None Include="Properties\DataSources\SchedulingSoftware.datasource" />
     <None Include="Properties\Settings.settings">
@@ -311,6 +354,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model2.cs</LastGenOutput>
     </Content>
+    <Content Include="Properties\DataSources\ghtoken.txt" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
