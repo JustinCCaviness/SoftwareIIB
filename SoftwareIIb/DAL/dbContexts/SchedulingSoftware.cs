@@ -1,3 +1,5 @@
+using MySql.Data.EntityFramework;
+using SoftwareIIb.DAL.Configurations;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -5,6 +7,7 @@ using System.Linq;
 
 namespace SoftwareIIb
 {
+    [DbConfigurationType(typeof(MySqlDataConfiguration))]
     public partial class SchedulingSoftware : DbContext
     {
         //public SchedulingSoftware()
@@ -14,6 +17,7 @@ namespace SoftwareIIb
         public SchedulingSoftware()
             : base("name=MySQL")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SchedulingSoftware, Migrations.Configuration>());
         }
         public virtual DbSet<address> addresses { get; set; }
         public virtual DbSet<appointment> appointments { get; set; }
@@ -22,8 +26,35 @@ namespace SoftwareIIb
         public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<user> users { get; set; }
 
+        public int SaveChanges<TEntity>() where TEntity : class
+        {
+            var original = this.ChangeTracker.Entries()
+                        .Where(x => !typeof(TEntity).IsAssignableFrom(x.Entity.GetType()) && x.State != EntityState.Unchanged)
+                        .GroupBy(x => x.State)
+                        .ToList();
+
+            foreach (var entry in this.ChangeTracker.Entries().Where(x => !typeof(TEntity).IsAssignableFrom(x.Entity.GetType())))
+            {
+                entry.State = EntityState.Unchanged;
+            }
+
+            var rows = base.SaveChanges();
+
+            foreach (var state in original)
+            {
+                foreach (var entry in state)
+                {
+                    entry.State = state.Key;
+                }
+            }
+
+            return rows;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<address>()
                 .HasMany(e => e.customers)
                 .WithRequired(e => e.address)
@@ -48,6 +79,7 @@ namespace SoftwareIIb
                 .HasMany(e => e.appointments)
                 .WithRequired(e => e.user)
                 .WillCascadeOnDelete(false);
+
         }
     }
 }

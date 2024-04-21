@@ -2,6 +2,7 @@
 using SoftwareIIb;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
@@ -55,19 +56,42 @@ public partial class MainForm : Form
     {
         Authenticator.authenticate += (u, p) =>
         {
+            user cu = null;
             if (Authenticator.last)
             {
-                return Authenticator.last;
+                Authenticator.currentUser = Authenticator.currentUser ?? u;
             } else
             {
                 SchedulingSoftware sscontext = new SchedulingSoftware();
-                user cu = sscontext.users.SingleOrDefault(user => user.userName == u && user.password == p);
-                return Authenticator.last || (Authenticator.last = cu != null);
+                cu = sscontext.users.SingleOrDefault(user => user.userName == u && user.password == p);
+                Authenticator.currentUser = Authenticator.currentUser ?? (cu != null ? u : null);
             }
+            return Authenticator.last || (Authenticator.last = cu != null);
         };
         Authenticator.authenticate += (u, p) =>
         {
+            if (Authenticator.last)
+            {
+                Authenticator.currentUser = Authenticator.currentUser ?? u;
+            } else
+            {
+                Authenticator.currentUser = Authenticator.currentUser ?? (p == "ABC123" ? u : null);
+            }
             return Authenticator.last || (Authenticator.last = p == "ABC123");
+        };
+        Authenticator.authenticate += (u, p) =>
+        {
+            if (Authenticator.last)
+            {
+                try
+                {
+                    File.AppendAllText(@"authlog.txt", $"User {u} logged in {DateTime.Now.ToString()}{Environment.NewLine}");
+                } catch
+                {
+                    // do nothing if logfile.txt doesn't exist already
+                }
+            }
+            return Authenticator.last;
         };
     }
     private void btnLogin_Click(object sender, EventArgs e)
@@ -144,6 +168,7 @@ public partial class MainForm : Form
             // 
             // MainForm
             // 
+            this.AcceptButton = this.btnLogin;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
