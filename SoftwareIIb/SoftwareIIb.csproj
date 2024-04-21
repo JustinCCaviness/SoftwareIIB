@@ -311,6 +311,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model2.cs</LastGenOutput>
     </Content>
+    <Content Include="Properties\DataSources\ghtoken.txt" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
