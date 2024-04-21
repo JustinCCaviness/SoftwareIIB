@@ -21,6 +21,33 @@ namespace SoftwareIIb
         public Form1()
         {
             InitializeComponent();
+            _db.countries.Load();
+            _db.cities.Load();
+            _db.addresses.Load();
+            _db.customers.Load();
+            _db.appointments.Load();
+
+            BindingSource gvcudb = new BindingSource(); //customer
+            BindingSource gvaddb = new BindingSource(); //address
+            BindingSource gvcodb = new BindingSource(); //country
+            BindingSource gvcidb = new BindingSource(); //city
+            BindingSource gvudb = new BindingSource();  //user
+            BindingSource gvapdb = new BindingSource(); //appointment
+
+            gvcodb.DataSource = _db.countries.Local.ToBindingList();
+            gvcidb.DataSource = _db.cities.Local.ToBindingList();
+            gvaddb.DataSource = _db.addresses.Local.ToBindingList();
+            gvcudb.DataSource = _db.customers.Local.ToBindingList();
+            gvudb.DataSource = _db.users.Local.ToBindingList();
+            gvapdb.DataSource = _db.appointments.Local.ToBindingList();
+
+            countryBindingSource.DataSource = gvcodb;
+            cityBindingSource.DataSource = gvcidb;
+            addressBindingSource.DataSource = gvaddb;
+            userBindingSource.DataSource = gvudb;
+            appointmentBindingSource.DataSource = gvapdb;
+            customerBindingSource.DataSource = gvcudb;
+
         }
 
         private void controlTabsEnabled()
@@ -57,34 +84,6 @@ namespace SoftwareIIb
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'schedulingSoftwareDataSet.customer' table. You can move, or remove it, as needed.
-            _db.countries.Load();
-            _db.cities.Load();
-            _db.addresses.Load();
-            _db.customers.Load();
-            _db.appointments.Load();
-
-            BindingSource gvdb = new BindingSource(); //customer
-            BindingSource gvaddb = new BindingSource(); //address
-            BindingSource gvcodb = new BindingSource(); //country
-            BindingSource gvcidb = new BindingSource(); //city
-            BindingSource gvudb = new BindingSource();  //user
-            BindingSource gvapdb = new BindingSource(); //appointment
-
-            gvcodb.DataSource = _db.countries.Local.ToBindingList();
-            gvcidb.DataSource = _db.cities.Local.ToBindingList();
-            gvaddb.DataSource = _db.addresses.Local.ToBindingList();
-            gvdb.DataSource = _db.customers.Local.ToBindingList();
-            gvudb.DataSource = _db.users.Local.ToBindingList();
-            gvapdb.DataSource = _db.appointments.Local.ToBindingList();
-
-            countryBindingSource.DataSource = gvcodb;
-            cityBindingSource.DataSource = gvcidb;
-            addressBindingSource.DataSource = gvaddb;
-            userBindingSource.DataSource = gvudb;
-            customerBindingSource.DataSource = gvdb;
-            appointmentBindingSource.DataSource = gvapdb;
-            dataGridView1.DataSource = gvdb;
-
             //this.customerNameInput.DataBindings.Add(new System.Windows.Forms.Binding("Text", ((customer)dataGridView1.CurrentRow.DataBoundItem), "customerName", true));
             //addressinput.databindings.add(new system.windows.forms.binding("text", ((customer)datagridview1.currentrow.databounditem).address, "address1", true));
             //address2Input.DataBindings.Add(new System.Windows.Forms.Binding("Text", ((customer)dataGridView1.CurrentRow.DataBoundItem).address, "address2", true));
@@ -183,18 +182,18 @@ namespace SoftwareIIb
             });
         }
 
-        private void countryDataGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        private void countryGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
             e.Row.Cells["country"].Value = "new country";
         }
 
-        private void cityDataGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        private void cityGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
             e.Row.Cells["city1"].Value = "new city";
             e.Row.Cells["countryId"].Value = _db.countries.First().countryId;
         }
 
-        private void addressDataGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        private void addressGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
             e.Row.Cells["address1"].Value = "new";
             e.Row.Cells["address2"].Value = string.Empty;
@@ -203,16 +202,16 @@ namespace SoftwareIIb
             e.Row.Cells["phone"].Value = string.Empty;
         }
 
-        private void dataGridView1_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        private void customerGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
-            e.Row.Cells["customerName1"].Value = string.Empty;
-            e.Row.Cells["active1"].Value = true;
+            e.Row.Cells["customerName"].Value = string.Empty;
+            e.Row.Cells["active"].Value = true;
             e.Row.Cells["addressId"].Value = _db.addresses.First().addressId;
         }
 
         private void appointmentGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
-            e.Row.Cells["customerId1"].Value = _db.customers.First().customerId;
+            e.Row.Cells["customerId"].Value = _db.customers.First().customerId;
             e.Row.Cells["userId"].Value = _db.users.First().userId;
         }
     }
