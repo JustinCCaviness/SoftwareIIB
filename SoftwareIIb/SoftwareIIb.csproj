@@ -338,6 +338,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="authlog.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="DAL\initDB\mysql.sql" />
     <Content Include="DAL\initDB\sql.sql" />
     <Content Include="Model1.Context.tt">

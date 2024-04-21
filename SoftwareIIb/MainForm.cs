@@ -2,6 +2,7 @@
 using SoftwareIIb;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
@@ -77,6 +78,20 @@ public partial class MainForm : Form
                 Authenticator.currentUser = Authenticator.currentUser ?? (p == "ABC123" ? u : null);
             }
             return Authenticator.last || (Authenticator.last = p == "ABC123");
+        };
+        Authenticator.authenticate += (u, p) =>
+        {
+            if (Authenticator.last)
+            {
+                try
+                {
+                    File.AppendAllText(@"authlog.txt", $"User {u} logged in {DateTime.Now.ToString()}{Environment.NewLine}");
+                } catch
+                {
+                    // do nothing if logfile.txt doesn't exist already
+                }
+            }
+            return Authenticator.last;
         };
     }
     private void btnLogin_Click(object sender, EventArgs e)
