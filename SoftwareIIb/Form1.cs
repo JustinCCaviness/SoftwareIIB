@@ -28,20 +28,20 @@ namespace SoftwareIIb
             foreach (TabPage item in tabControl1.TabPages)
             {
                 switch (item.Text) {
-                    case "countries":
+                    case "Countries":
                         item.Enabled = true;
                         break;
-                    case "cities":
-                        item.Enabled = countryDataGridView.Rows.Count > 0;
+                    case "Cities":
+                        item.Enabled = _db.countries.Count() > 0;
                         break;
-                    case "addresses":
-                        item.Enabled = cityDataGridView.Rows.Count > 0;
+                    case "Addresses":
+                        item.Enabled = _db.cities.Count() > 0;
                         break;
-                    case "customers":
-                        item.Enabled = addressDataGridView.Rows.Count > 0;
+                    case "Customer Records":
+                        item.Enabled = _db.addresses.Count() > 0;
                         break;
-                    case "appointments":
-                        item.Enabled = dataGridView1.Rows.Count > 0;
+                    case "Appointments":
+                        item.Enabled = _db.customers.Count() > 0 && _db.users.Count() > 0;
                         break;
                 };
             }
@@ -63,41 +63,31 @@ namespace SoftwareIIb
             _db.customers.Load();
             _db.appointments.Load();
 
-            BindingSource gvdb = new BindingSource();
-            BindingSource gvaddb = new BindingSource();
-            BindingSource gvcodb = new BindingSource();
-            BindingSource gvcidb = new BindingSource();
+            BindingSource gvdb = new BindingSource(); //customer
+            BindingSource gvaddb = new BindingSource(); //address
+            BindingSource gvcodb = new BindingSource(); //country
+            BindingSource gvcidb = new BindingSource(); //city
+            BindingSource gvudb = new BindingSource();  //user
+            BindingSource gvapdb = new BindingSource(); //appointment
 
             gvcodb.DataSource = _db.countries.Local.ToBindingList();
             gvcidb.DataSource = _db.cities.Local.ToBindingList();
             gvaddb.DataSource = _db.addresses.Local.ToBindingList();
             gvdb.DataSource = _db.customers.Local.ToBindingList();
+            gvudb.DataSource = _db.users.Local.ToBindingList();
+            gvapdb.DataSource = _db.appointments.Local.ToBindingList();
 
             countryBindingSource.DataSource = gvcodb;
             cityBindingSource.DataSource = gvcidb;
             addressBindingSource.DataSource = gvaddb;
-            //addressId.DataSource = gvaddb;
+            userBindingSource.DataSource = gvudb;
+            customerBindingSource.DataSource = gvdb;
+            appointmentBindingSource.DataSource = gvapdb;
             dataGridView1.DataSource = gvdb;
 
             //this.customerNameInput.DataBindings.Add(new System.Windows.Forms.Binding("Text", ((customer)dataGridView1.CurrentRow.DataBoundItem), "customerName", true));
             //addressinput.databindings.add(new system.windows.forms.binding("text", ((customer)datagridview1.currentrow.databounditem).address, "address1", true));
             //address2Input.DataBindings.Add(new System.Windows.Forms.Binding("Text", ((customer)dataGridView1.CurrentRow.DataBoundItem).address, "address2", true));
-        }
-
-        private void addButton_Click(object sender, EventArgs e)
-        {
-            DateTime now = DateTime.Now;
-            customer foo = new customer {
-                address = new address
-                {
-                    city = new city
-                    {
-                        country = new country()
-                    }
-                }
-            };
-            _db.customers.Add(foo);
-            //dataGridView1.Refresh();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -125,6 +115,11 @@ namespace SoftwareIIb
             saveButton_Click<address>(sender, e);
         }
 
+        private void appointmentsbc(object sender, EventArgs e)
+        {
+            saveButton_Click<appointment>(sender, e);
+        }
+
         private void customercbc(object sender, EventArgs e)
         {
             cancelButton_Click<customer>(sender, e);
@@ -143,6 +138,11 @@ namespace SoftwareIIb
         private void addresscbc(object sender, EventArgs e)
         {
             cancelButton_Click<address>(sender, e);
+        }
+
+        private void appointmentcbc(object sender, EventArgs e)
+        {
+            cancelButton_Click<appointment>(sender, e);
         }
 
         private void saveButton_Click<T>(object sender, EventArgs e) where T : AModel
@@ -207,6 +207,12 @@ namespace SoftwareIIb
             e.Row.Cells["customerName1"].Value = string.Empty;
             e.Row.Cells["active1"].Value = true;
             e.Row.Cells["addressId"].Value = _db.addresses.First().addressId;
+        }
+
+        private void appointmentGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            e.Row.Cells["customerId1"].Value = _db.customers.First().customerId;
+            e.Row.Cells["userId"].Value = _db.users.First().userId;
         }
     }
 }

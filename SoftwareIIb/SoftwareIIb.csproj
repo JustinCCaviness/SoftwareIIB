@@ -318,10 +318,12 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\address.datasource" />
+    <None Include="Properties\DataSources\appointment.datasource" />
     <None Include="Properties\DataSources\city.datasource" />
     <None Include="Properties\DataSources\country.datasource" />
     <None Include="Properties\DataSources\customer.datasource" />
     <None Include="Properties\DataSources\SchedulingSoftware.datasource" />
+    <None Include="Properties\DataSources\user.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

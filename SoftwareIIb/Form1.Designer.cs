@@ -46,8 +46,8 @@
             this.customerSaveButton = new System.Windows.Forms.Button();
             this.customerCancelButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.addressId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.appointmentsTab = new System.Windows.Forms.TabPage();
+            this.appointmentGridView = new System.Windows.Forms.DataGridView();
             this.customerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -66,24 +66,50 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countryKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressId = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.customerId1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.userId = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.location = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.end = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.appointmentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.country1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countryKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cityKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.city1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countryId = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.cityKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.addressKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.address1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.address2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.postalCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.customerKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customerName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.active1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.customerKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.locationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.urlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.appointmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.appointmentSaveButton = new System.Windows.Forms.Button();
+            this.appointmentCancelButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.countriesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.countryDataGridView)).BeginInit();
@@ -93,10 +119,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.addressDataGridView)).BeginInit();
             this.customerTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.appointmentsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cityBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -150,8 +180,8 @@
             this.countryDataGridView.AutoGenerateColumns = false;
             this.countryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.countryDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.countryKey,
-            this.country1});
+            this.country1,
+            this.countryKey});
             this.countryDataGridView.DataSource = this.countryBindingSource;
             this.countryDataGridView.Location = new System.Drawing.Point(0, 0);
             this.countryDataGridView.Name = "countryDataGridView";
@@ -196,9 +226,9 @@
             this.cityDataGridView.AutoGenerateColumns = false;
             this.cityDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cityDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cityKey,
             this.city1,
-            this.countryId});
+            this.countryId,
+            this.cityKey});
             this.cityDataGridView.DataSource = this.cityBindingSource;
             this.cityDataGridView.Location = new System.Drawing.Point(0, 0);
             this.cityDataGridView.Name = "cityDataGridView";
@@ -243,12 +273,12 @@
             this.addressDataGridView.AutoGenerateColumns = false;
             this.addressDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.addressDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.addressKey,
             this.address1,
             this.address2,
             this.cityId,
             this.postalCode,
-            this.phone});
+            this.phone,
+            this.addressKey});
             this.addressDataGridView.DataSource = this.addressBindingSource;
             this.addressDataGridView.Location = new System.Drawing.Point(0, 0);
             this.addressDataGridView.Name = "addressDataGridView";
@@ -294,10 +324,10 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.customerKey,
             this.customerName1,
             this.active1,
-            this.addressId});
+            this.addressId,
+            this.customerKey});
             this.dataGridView1.DataSource = this.customerBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
@@ -305,17 +335,11 @@
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_DefaultValuesNeeded);
             // 
-            // addressId
-            // 
-            this.addressId.DataPropertyName = "addressId";
-            this.addressId.DataSource = this.addressBindingSource;
-            this.addressId.DisplayMember = "address1";
-            this.addressId.HeaderText = "address";
-            this.addressId.Name = "addressId";
-            this.addressId.ValueMember = "addressId";
-            // 
             // appointmentsTab
             // 
+            this.appointmentsTab.Controls.Add(this.appointmentSaveButton);
+            this.appointmentsTab.Controls.Add(this.appointmentCancelButton);
+            this.appointmentsTab.Controls.Add(this.appointmentGridView);
             this.appointmentsTab.Location = new System.Drawing.Point(4, 22);
             this.appointmentsTab.Name = "appointmentsTab";
             this.appointmentsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -323,6 +347,39 @@
             this.appointmentsTab.TabIndex = 1;
             this.appointmentsTab.Text = "Appointments";
             this.appointmentsTab.UseVisualStyleBackColor = true;
+            // 
+            // appointmentGridView
+            // 
+            this.appointmentGridView.AutoGenerateColumns = false;
+            this.appointmentGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.appointmentGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.customerId1,
+            this.userId,
+            this.title,
+            this.description,
+            this.location,
+            this.contact,
+            this.type,
+            this.url,
+            this.start,
+            this.end,
+            this.titleDataGridViewTextBoxColumn,
+            this.descriptionDataGridViewTextBoxColumn,
+            this.locationDataGridViewTextBoxColumn,
+            this.contactDataGridViewTextBoxColumn,
+            this.typeDataGridViewTextBoxColumn,
+            this.urlDataGridViewTextBoxColumn,
+            this.startDataGridViewTextBoxColumn,
+            this.endDataGridViewTextBoxColumn,
+            this.customerDataGridViewTextBoxColumn,
+            this.userDataGridViewTextBoxColumn,
+            this.appointmentId});
+            this.appointmentGridView.DataSource = this.appointmentBindingSource;
+            this.appointmentGridView.Location = new System.Drawing.Point(0, 0);
+            this.appointmentGridView.Name = "appointmentGridView";
+            this.appointmentGridView.Size = new System.Drawing.Size(772, 368);
+            this.appointmentGridView.TabIndex = 6;
+            this.appointmentGridView.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.appointmentGridView_DefaultValuesNeeded);
             // 
             // customerId
             // 
@@ -432,12 +489,91 @@
             this.dataGridViewTextBoxColumn9.HeaderText = "appointments";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             // 
-            // countryKey
+            // addressId
             // 
-            this.countryKey.DataPropertyName = "countryId";
-            this.countryKey.HeaderText = "countryId";
-            this.countryKey.Name = "countryKey";
-            this.countryKey.Visible = false;
+            this.addressId.DataPropertyName = "addressId";
+            this.addressId.DataSource = this.addressBindingSource;
+            this.addressId.DisplayMember = "address1";
+            this.addressId.HeaderText = "address";
+            this.addressId.Name = "addressId";
+            this.addressId.ValueMember = "addressId";
+            // 
+            // customerId1
+            // 
+            this.customerId1.DataPropertyName = "customerId";
+            this.customerId1.DataSource = this.customerBindingSource;
+            this.customerId1.DisplayMember = "customerName";
+            this.customerId1.HeaderText = "customer";
+            this.customerId1.Name = "customerId1";
+            this.customerId1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.customerId1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.customerId1.ValueMember = "customerId";
+            // 
+            // userId
+            // 
+            this.userId.DataPropertyName = "userId";
+            this.userId.DataSource = this.userBindingSource;
+            this.userId.DisplayMember = "userName";
+            this.userId.HeaderText = "user";
+            this.userId.Name = "userId";
+            this.userId.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.userId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.userId.ValueMember = "userId";
+            // 
+            // title
+            // 
+            this.title.DataPropertyName = "title";
+            this.title.HeaderText = "title";
+            this.title.Name = "title";
+            // 
+            // description
+            // 
+            this.description.DataPropertyName = "description";
+            this.description.HeaderText = "description";
+            this.description.Name = "description";
+            // 
+            // location
+            // 
+            this.location.DataPropertyName = "location";
+            this.location.HeaderText = "location";
+            this.location.Name = "location";
+            // 
+            // contact
+            // 
+            this.contact.DataPropertyName = "contact";
+            this.contact.HeaderText = "contact";
+            this.contact.Name = "contact";
+            // 
+            // type
+            // 
+            this.type.DataPropertyName = "type";
+            this.type.HeaderText = "type";
+            this.type.Name = "type";
+            // 
+            // url
+            // 
+            this.url.DataPropertyName = "url";
+            this.url.HeaderText = "url";
+            this.url.Name = "url";
+            // 
+            // start
+            // 
+            this.start.DataPropertyName = "start";
+            this.start.HeaderText = "start";
+            this.start.Name = "start";
+            // 
+            // end
+            // 
+            this.end.DataPropertyName = "end";
+            this.end.HeaderText = "end";
+            this.end.Name = "end";
+            // 
+            // appointmentId
+            // 
+            this.appointmentId.DataPropertyName = "appointmentId";
+            this.appointmentId.HeaderText = "appointmentId";
+            this.appointmentId.Name = "appointmentId";
+            this.appointmentId.Visible = false;
             // 
             // country1
             // 
@@ -445,16 +581,16 @@
             this.country1.HeaderText = "country";
             this.country1.Name = "country1";
             // 
+            // countryKey
+            // 
+            this.countryKey.DataPropertyName = "countryId";
+            this.countryKey.HeaderText = "countryId";
+            this.countryKey.Name = "countryKey";
+            this.countryKey.Visible = false;
+            // 
             // countryBindingSource
             // 
             this.countryBindingSource.DataSource = typeof(SoftwareIIb.country);
-            // 
-            // cityKey
-            // 
-            this.cityKey.DataPropertyName = "cityId";
-            this.cityKey.HeaderText = "cityId";
-            this.cityKey.Name = "cityKey";
-            this.cityKey.Visible = false;
             // 
             // city1
             // 
@@ -473,16 +609,16 @@
             this.countryId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.countryId.ValueMember = "countryId";
             // 
+            // cityKey
+            // 
+            this.cityKey.DataPropertyName = "cityId";
+            this.cityKey.HeaderText = "cityId";
+            this.cityKey.Name = "cityKey";
+            this.cityKey.Visible = false;
+            // 
             // cityBindingSource
             // 
             this.cityBindingSource.DataSource = typeof(SoftwareIIb.city);
-            // 
-            // addressKey
-            // 
-            this.addressKey.DataPropertyName = "addressId";
-            this.addressKey.HeaderText = "addressId";
-            this.addressKey.Name = "addressKey";
-            this.addressKey.Visible = false;
             // 
             // address1
             // 
@@ -519,17 +655,16 @@
             this.phone.HeaderText = "phone";
             this.phone.Name = "phone";
             // 
+            // addressKey
+            // 
+            this.addressKey.DataPropertyName = "addressId";
+            this.addressKey.HeaderText = "addressId";
+            this.addressKey.Name = "addressKey";
+            this.addressKey.Visible = false;
+            // 
             // addressBindingSource
             // 
             this.addressBindingSource.DataSource = typeof(SoftwareIIb.address);
-            // 
-            // customerKey
-            // 
-            this.customerKey.DataPropertyName = "customerId";
-            this.customerKey.HeaderText = "customerId";
-            this.customerKey.Name = "customerKey";
-            this.customerKey.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.customerKey.Visible = false;
             // 
             // customerName1
             // 
@@ -543,9 +678,105 @@
             this.active1.HeaderText = "active";
             this.active1.Name = "active1";
             // 
+            // customerKey
+            // 
+            this.customerKey.DataPropertyName = "customerId";
+            this.customerKey.HeaderText = "customerId";
+            this.customerKey.Name = "customerKey";
+            this.customerKey.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.customerKey.Visible = false;
+            // 
             // customerBindingSource
             // 
             this.customerBindingSource.DataSource = typeof(SoftwareIIb.customer);
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(SoftwareIIb.user);
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "title";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "description";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            // 
+            // locationDataGridViewTextBoxColumn
+            // 
+            this.locationDataGridViewTextBoxColumn.DataPropertyName = "location";
+            this.locationDataGridViewTextBoxColumn.HeaderText = "location";
+            this.locationDataGridViewTextBoxColumn.Name = "locationDataGridViewTextBoxColumn";
+            // 
+            // contactDataGridViewTextBoxColumn
+            // 
+            this.contactDataGridViewTextBoxColumn.DataPropertyName = "contact";
+            this.contactDataGridViewTextBoxColumn.HeaderText = "contact";
+            this.contactDataGridViewTextBoxColumn.Name = "contactDataGridViewTextBoxColumn";
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            // 
+            // urlDataGridViewTextBoxColumn
+            // 
+            this.urlDataGridViewTextBoxColumn.DataPropertyName = "url";
+            this.urlDataGridViewTextBoxColumn.HeaderText = "url";
+            this.urlDataGridViewTextBoxColumn.Name = "urlDataGridViewTextBoxColumn";
+            // 
+            // startDataGridViewTextBoxColumn
+            // 
+            this.startDataGridViewTextBoxColumn.DataPropertyName = "start";
+            this.startDataGridViewTextBoxColumn.HeaderText = "start";
+            this.startDataGridViewTextBoxColumn.Name = "startDataGridViewTextBoxColumn";
+            // 
+            // endDataGridViewTextBoxColumn
+            // 
+            this.endDataGridViewTextBoxColumn.DataPropertyName = "end";
+            this.endDataGridViewTextBoxColumn.HeaderText = "end";
+            this.endDataGridViewTextBoxColumn.Name = "endDataGridViewTextBoxColumn";
+            // 
+            // customerDataGridViewTextBoxColumn
+            // 
+            this.customerDataGridViewTextBoxColumn.DataPropertyName = "customer";
+            this.customerDataGridViewTextBoxColumn.HeaderText = "customer";
+            this.customerDataGridViewTextBoxColumn.Name = "customerDataGridViewTextBoxColumn";
+            // 
+            // userDataGridViewTextBoxColumn
+            // 
+            this.userDataGridViewTextBoxColumn.DataPropertyName = "user";
+            this.userDataGridViewTextBoxColumn.HeaderText = "user";
+            this.userDataGridViewTextBoxColumn.Name = "userDataGridViewTextBoxColumn";
+            // 
+            // appointmentBindingSource
+            // 
+            this.appointmentBindingSource.DataSource = typeof(SoftwareIIb.appointment);
+            // 
+            // appointmentSaveButton
+            // 
+            this.appointmentSaveButton.Location = new System.Drawing.Point(696, 373);
+            this.appointmentSaveButton.Name = "appointmentSaveButton";
+            this.appointmentSaveButton.Size = new System.Drawing.Size(70, 26);
+            this.appointmentSaveButton.TabIndex = 10;
+            this.appointmentSaveButton.Text = "Save";
+            this.appointmentSaveButton.UseVisualStyleBackColor = true;
+            this.appointmentSaveButton.Click += new System.EventHandler(this.appointmentsbc);
+            // 
+            // appointmentCancelButton
+            // 
+            this.appointmentCancelButton.Location = new System.Drawing.Point(620, 372);
+            this.appointmentCancelButton.Name = "appointmentCancelButton";
+            this.appointmentCancelButton.Size = new System.Drawing.Size(70, 26);
+            this.appointmentCancelButton.TabIndex = 9;
+            this.appointmentCancelButton.Text = "Cancel";
+            this.appointmentCancelButton.UseVisualStyleBackColor = true;
+            this.appointmentCancelButton.Click += new System.EventHandler(this.appointmentcbc);
             // 
             // Form1
             // 
@@ -566,10 +797,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.addressDataGridView)).EndInit();
             this.customerTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.appointmentsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.countryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cityBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -633,20 +868,46 @@
         private System.Windows.Forms.Button cityCancelButton;
         private System.Windows.Forms.Button addressSaveButton;
         private System.Windows.Forms.Button addressCancelButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn countryKey;
+        private System.Windows.Forms.DataGridView appointmentGridView;
+        private System.Windows.Forms.BindingSource appointmentBindingSource;
+        private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn country1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn addressKey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn countryKey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn city1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn countryId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cityKey;
         private System.Windows.Forms.DataGridViewTextBoxColumn address1;
         private System.Windows.Forms.DataGridViewTextBoxColumn address2;
         private System.Windows.Forms.DataGridViewComboBoxColumn cityId;
         private System.Windows.Forms.DataGridViewTextBoxColumn postalCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn phone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cityKey;
-        private System.Windows.Forms.DataGridViewTextBoxColumn city1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn countryId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customerKey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn addressKey;
         private System.Windows.Forms.DataGridViewTextBoxColumn customerName1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn active1;
         private System.Windows.Forms.DataGridViewComboBoxColumn addressId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerKey;
+        private System.Windows.Forms.DataGridViewComboBoxColumn customerId1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn userId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn title;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn location;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn url;
+        private System.Windows.Forms.DataGridViewTextBoxColumn start;
+        private System.Windows.Forms.DataGridViewTextBoxColumn end;
+        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn locationDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contactDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn urlDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn appointmentId;
+        private System.Windows.Forms.Button appointmentSaveButton;
+        private System.Windows.Forms.Button appointmentCancelButton;
     }
 }
