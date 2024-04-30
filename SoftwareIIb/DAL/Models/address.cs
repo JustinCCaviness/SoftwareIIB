@@ -1,13 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using SoftwareIIb.DAL.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace SoftwareIIb
 {
-    using SoftwareIIb.DAL.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     [Table("address")]
+    [Index(nameof(cityId), Name = "IDX_cityId")]
     public partial class address : AModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,7 +28,6 @@ namespace SoftwareIIb
         [StringLength(50)]
         public string address2 { get; set; }
 
-        [Index("IDX_cityId")]
         public int? cityId { get; set; }
 
         [Required]

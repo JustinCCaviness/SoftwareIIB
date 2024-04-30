@@ -1,13 +1,14 @@
 namespace SoftwareIIb
 {
+    using Microsoft.EntityFrameworkCore;
     using SoftwareIIb.DAL.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("city")]
+    [Index(nameof(countryId), Name = "IDX_countryId")]
     public partial class city : AModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +25,6 @@ namespace SoftwareIIb
         [StringLength(50)]
         public string city1 { get; set; }
 
-        [Index("IDX_countryId")]
         public int? countryId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

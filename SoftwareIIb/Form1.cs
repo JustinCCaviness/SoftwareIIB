@@ -1,45 +1,72 @@
 ﻿using SoftwareIIb.DAL.Models;
+using SoftwareIIb.Exceptions;
+using SoftwareIIb.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Validation;
+using Microsoft.EntityFrameworkCore;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+using MySqlX.XDevAPI;
+using System.Threading;
+//using Microsoft.Extensions.Configuration;
 
 namespace SoftwareIIb
 {
     public partial class Form1 : Form
     {
-        private SchedulingSoftware _db = new SchedulingSoftware();
+        private readonly SchedulingSoftware _db;
+        private BindingSource gvcudb = []; //customer
+        private BindingSource gvaddb = []; //address
+        private BindingSource gvcodb = []; //country
+        private BindingSource gvcidb = []; //city
+        private BindingSource gvudb = [];  //user
+        private BindingSource gvapdb = []; //appointment
+        private DataSet _data = new DataSet();
+        private Task _timerTask;
+        CancellationTokenSource _cancellationTokenSource;
+        PeriodicTimer _periodicTimer;
 
         public Form1()
         {
+            _db = new SchedulingSoftware(ConfigurationManager.ConnectionStrings["MySQL"].ConnectionString);
+            _db.Database.Migrate();
             InitializeComponent();
             _db.countries.Load();
             _db.cities.Load();
             _db.addresses.Load();
             _db.customers.Load();
             _db.appointments.Load();
+            _db.users.Load();
 
-            BindingSource gvcudb = new BindingSource(); //customer
-            BindingSource gvaddb = new BindingSource(); //address
-            BindingSource gvcodb = new BindingSource(); //country
-            BindingSource gvcidb = new BindingSource(); //city
-            BindingSource gvudb = new BindingSource();  //user
-            BindingSource gvapdb = new BindingSource(); //appointment
+            _cancellationTokenSource = new();
+            _periodicTimer = new(TimeSpan.FromMinutes(1));
+            _timerTask = HandleTimerAsync(_periodicTimer, _cancellationTokenSource.Token);
+
+            _data.Tables.Add(_db.appointments.Local.ToBindingList().ToDataTable());
+            DataView dataView1 = new DataView(_data.Tables[0]);
 
             gvcodb.DataSource = _db.countries.Local.ToBindingList();
+            //.ToBindingList();
             gvcidb.DataSource = _db.cities.Local.ToBindingList();
+            //.ToBindingList();
             gvaddb.DataSource = _db.addresses.Local.ToBindingList();
+            //.ToBindingList();
             gvcudb.DataSource = _db.customers.Local.ToBindingList();
+            //.ToBindingList();
             gvudb.DataSource = _db.users.Local.ToBindingList();
+            //.ToBindingList();
             gvapdb.DataSource = _db.appointments.Local.ToBindingList();
+            //dataView1;    
+            //_db.appointments.Local;
+            //.ToBindingList();
 
             countryBindingSource.DataSource = gvcodb;
             cityBindingSource.DataSource = gvcidb;
@@ -47,28 +74,67 @@ namespace SoftwareIIb
             userBindingSource.DataSource = gvudb;
             appointmentBindingSource.DataSource = gvapdb;
             customerBindingSource.DataSource = gvcudb;
+        }
 
+        public void Cancel() => _cancellationTokenSource.Cancel();
+
+        async Task HandleTimerAsync(PeriodicTimer timer, CancellationToken cancel = default)
+        {
+            try
+            {
+                while (await timer.WaitForNextTickAsync(cancel))
+                {
+                    await Task.Run(() =>
+                    {
+                        DateTime targTime = DateTime.Now.AddMinutes(15);
+                        if (_db.appointments.ToList()
+                            .Any(x => x.userId == Authenticator.currentUser.userId && 
+                                x.start.ToLocalTime() <= targTime
+                            ))
+                        {
+                            MessageBox.Show("You have an appointment starting soon");
+                        }
+                    },
+                    cancel);
+                }
+            }
+            catch (Exception ex)
+            {
+                //Handle exception without propagating
+            }
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            _periodicTimer.Dispose();
+            await _timerTask;
+            GC.SuppressFinalize(this);
         }
 
         private void controlTabsEnabled()
         {
             foreach (TabPage item in tabControl1.TabPages)
             {
-                switch (item.Text) {
+                switch (item.Text)
+                {
                     case "Countries":
                         item.Enabled = true;
                         break;
                     case "Cities":
                         item.Enabled = _db.countries.Count() > 0;
+                        if (!item.Enabled) throw new TabUnavailableException("You must have at least 1 country defined to use this tab");
                         break;
                     case "Addresses":
                         item.Enabled = _db.cities.Count() > 0;
+                        if (!item.Enabled) throw new TabUnavailableException("You must have at least 1 city defined to use this tab");
                         break;
                     case "Customer Records":
                         item.Enabled = _db.addresses.Count() > 0;
+                        if (!item.Enabled) throw new TabUnavailableException("You must have at least 1 address defined to use this tab");
                         break;
                     case "Appointments":
                         item.Enabled = _db.customers.Count() > 0 && _db.users.Count() > 0;
+                        if (!item.Enabled) throw new TabUnavailableException("You must have at least 1 customer and 1 user defined to use this tab");
                         break;
                 };
             }
@@ -76,8 +142,16 @@ namespace SoftwareIIb
 
         private void tabController_Selecting(object sender, TabControlCancelEventArgs e)
         {
+            string msg;
             if (e.TabPageIndex < 0) return;
-            controlTabsEnabled();
+            try
+            {
+                controlTabsEnabled();
+            }
+            catch (TabUnavailableException te)
+            {
+                if (!e.TabPage.Enabled) MessageBox.Show(te.Message);
+            }
             e.Cancel = !e.TabPage.Enabled;
         }
 
@@ -127,7 +201,7 @@ namespace SoftwareIIb
 
         private void countrycbc(object sender, EventArgs e)
         {
-            cancelButton_Click<country>(sender,e);
+            cancelButton_Click<country>(sender, e);
         }
 
         private void citycbc(object sender, EventArgs e)
@@ -151,13 +225,14 @@ namespace SoftwareIIb
             _db.ChangeTracker.Entries<T>().ToList().Where(x => x.State == EntityState.Added).ToList().ForEach(c =>
             {
                 ((AModel)c.Entity).createDate = c.Entity.lastUpdate = cdate;
-                c.Entity.createdBy = c.Entity.lastUpdateBy = Authenticator.currentUser;
+                c.Entity.createdBy = c.Entity.lastUpdateBy = Authenticator.currentUser.userName;
 
             });
             //get updated
-            _db.ChangeTracker.Entries<T>().ToList().Where(x => x.State == EntityState.Modified).ToList().ForEach(c => {
+            _db.ChangeTracker.Entries<T>().ToList().Where(x => x.State == EntityState.Modified).ToList().ForEach(c =>
+            {
                 c.Entity.lastUpdate = DateTime.Now;
-                c.Entity.lastUpdateBy = Authenticator.currentUser;
+                c.Entity.lastUpdateBy = Authenticator.currentUser.userName;
             });
 
             // Save the changes
@@ -184,7 +259,7 @@ namespace SoftwareIIb
 
         private void countryGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
-            e.Row.Cells["country"].Value = "new country";
+            e.Row.Cells["country1"].Value = "new country";
         }
 
         private void cityGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
@@ -213,6 +288,104 @@ namespace SoftwareIIb
         {
             e.Row.Cells["customerId"].Value = _db.customers.First().customerId;
             e.Row.Cells["userId"].Value = _db.users.First().userId;
+            e.Row.Cells["start"].Value = DateTime.UtcNow;
+            e.Row.Cells["end"].Value = ((DateTime)e.Row.Cells["start"].Value).AddMinutes(15);
+        }
+
+        private void weekRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                DateTime start = DateTime.Now;
+                DateTime weekOut = DateTime.Now.AddDays(7);
+                gvapdb.DataSource = new ObservableCollection<appointment>(
+                    _db.appointments.Where(ap => ap.start >= start && ap.start <= weekOut)
+                ).ToBindingList();
+                appointmentGridView.Refresh();
+            }
+        }
+
+        private void monthRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                DateTime start = DateTime.Now;
+                DateTime monthOut = DateTime.Now.AddMonths(1);
+                gvapdb.DataSource = new ObservableCollection<appointment>(
+                    _db.appointments.Where(ap => ap.start >= start && ap.start <= monthOut)
+                ).ToBindingList();
+                appointmentGridView.Refresh();
+            }
+        }
+
+        private void allRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                gvapdb.DataSource = _db.appointments.Local.ToBindingList();
+                appointmentGridView.Refresh();
+            }
+        }
+
+        private void appointmentGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            bool error = false;
+            // you can obtain current editing value like this:
+            var currentCell = appointmentGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            appointment currentRecord = (appointment)currentCell.OwningRow.DataBoundItem;
+            string message = string.Empty;
+
+            object current = appointmentGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            switch (appointmentGridView.Columns[e.ColumnIndex].HeaderText)
+            {
+                case "start":
+                case "end":
+                    if (error = badStartEnd(currentRecord.start, currentRecord.end))
+                    {
+                        message = "Start time must be before end time";
+                    }
+                    else if (error = overlapping(currentRecord.start, currentRecord.end))
+                    {
+                        message = "This appointment overlaps with an existing appointment";
+                    }
+                    else if (error = outsideHours(currentRecord.start, currentRecord.end))
+                    {
+                        message = "Appointment starts or ends outside of regular business hours";
+                    }
+                    break;
+            }
+            if (error)
+            {
+                MessageBox.Show(message);
+                e.Cancel = true;
+            }
+        }
+
+        private bool badStartEnd(DateTime start, DateTime end)
+        {
+            return start > end || end < start || start == end;
+        }
+
+        private bool overlapping(DateTime start, DateTime end)
+        {
+            return _db.appointments.Any(x => start >= x.start && start < x.end) || _db.appointments.Any(x => end > x.start && end <= x.end);
+        }
+        private bool outsideHours(DateTime start, DateTime end)
+        {
+            var b = start.ToLocalTime().TimeOfDay;
+            var e = end.ToLocalTime().TimeOfDay;
+
+            bool error = false;
+            TimeSpan businessStartTime, businessEndTime;
+            businessStartTime = new TimeSpan(08, 00, 00);
+            businessEndTime = new TimeSpan(17, 30, 00);
+            return b < businessStartTime || e > businessEndTime;
+        }
+
+        private void reportButton_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new();
+            form2.ShowDialog();
         }
     }
 }

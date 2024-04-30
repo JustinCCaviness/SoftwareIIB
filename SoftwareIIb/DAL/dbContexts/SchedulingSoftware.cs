@@ -1,24 +1,42 @@
-using MySql.Data.EntityFramework;
-using SoftwareIIb.DAL.Configurations;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Linq;
+using System.Security.Policy;
+using SoftwareIIb.Extensions;
+using SoftwareIIb.DAL.Attributes;
+using System.Data.Common;
+using System.Reflection.Emit;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace SoftwareIIb
 {
-    [DbConfigurationType(typeof(MySqlDataConfiguration))]
+    //[DbConfigurationType(typeof(MySqlDataConfiguration))]
     public partial class SchedulingSoftware : DbContext
     {
+        private readonly string _connectionString;
         //public SchedulingSoftware()
         //    : base("name=SoftwareIIb.Properties.Settings.SchedulingSoftwareConnectionString")
         //{
         //}
-        public SchedulingSoftware()
-            : base("name=MySQL")
+
+        public SchedulingSoftware(string connectionString) : base()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SchedulingSoftware, Migrations.Configuration>());
+            _connectionString = connectionString;
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                .UseMySQL(_connectionString,
+                    options => options.EnableRetryOnFailure()
+                );
+
+        }
+
+
         public virtual DbSet<address> addresses { get; set; }
         public virtual DbSet<appointment> appointments { get; set; }
         public virtual DbSet<city> cities { get; set; }
@@ -26,9 +44,19 @@ namespace SoftwareIIb
         public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<user> users { get; set; }
 
+        public override int SaveChanges()
+        {
+            ChangeTracker.Entries<appointment>().Where(appt => appt.State != EntityState.Unchanged).ToList().ForEach(appt =>
+            {
+                appt.Entity.start = appt.Entity.start.SaveDateAsUtc();
+                appt.Entity.end = appt.Entity.end.SaveDateAsUtc();
+            });
+            return base.SaveChanges();
+        }
+
         public int SaveChanges<TEntity>() where TEntity : class
         {
-            var original = this.ChangeTracker.Entries()
+            var original = ChangeTracker.Entries()
                         .Where(x => !typeof(TEntity).IsAssignableFrom(x.Entity.GetType()) && x.State != EntityState.Unchanged)
                         .GroupBy(x => x.State)
                         .ToList();
@@ -38,7 +66,7 @@ namespace SoftwareIIb
                 entry.State = EntityState.Unchanged;
             }
 
-            var rows = base.SaveChanges();
+            var rows = SaveChanges();
 
             foreach (var state in original)
             {
@@ -47,39 +75,64 @@ namespace SoftwareIIb
                     entry.State = state.Key;
                 }
             }
-
             return rows;
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<address>()
-                .HasMany(e => e.customers)
-                .WithRequired(e => e.address)
-                .WillCascadeOnDelete(false);
+                .HasOne(e => e.city)
+                .WithMany(c => c.addresses)
+                .OnDelete(DeleteBehavior.ClientNoAction);
 
             modelBuilder.Entity<city>()
-                .HasMany(e => e.addresses)
-                .WithRequired(e => e.city)
-                .WillCascadeOnDelete(false);
+                .HasOne(c => c.country)
+                .WithMany(c => c.cities)
+                .OnDelete(DeleteBehavior.ClientNoAction);
 
             modelBuilder.Entity<country>()
                 .HasMany(e => e.cities)
-                .WithRequired(e => e.country)
-                .WillCascadeOnDelete(false);
+                .WithOne(e => e.country)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<customer>()
-                .HasMany(e => e.appointments)
-                .WithRequired(e => e.customer)
-                .WillCascadeOnDelete(false);
+                .HasMany(c => c.appointments)
+                .WithOne(a => a.customer)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<customer>()
+                .HasOne(c => c.address)
+                .WithMany(a => a.customers)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<user>()
                 .HasMany(e => e.appointments)
-                .WithRequired(e => e.user)
-                .WillCascadeOnDelete(false);
+                .WithOne(a => a.user)
+                .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<appointment>(entity =>
+            {
+                // for nullable column type
+                //entity.Property(e => e.start).HasColumnType("datetime").HasConversion(x => x, y => DateTime.SpecifyKind(y.Value, DateTimeKind.Utc));
+                entity
+                    .Property(e => e.start)
+                    .HasColumnType("datetime")
+                    .HasConversion(
+                        x => (x.Kind != DateTimeKind.Utc) ? x.ToUniversalTime() : x,
+                        y => (y.Kind != DateTimeKind.Local) ? y.ToLocalTime() : y
+                    );
+                entity
+                    .Property(e => e.end)
+                    .HasColumnType("datetime")
+                    .HasConversion(
+                        x => (x.Kind != DateTimeKind.Utc) ? x.ToUniversalTime() : x,
+                        y => (y.Kind != DateTimeKind.Local) ? y.ToLocalTime() : y
+                        //x => x,
+                        //y => DateTime.SpecifyKind(y, DateTimeKind.Utc)
+                    );
+            });
         }
     }
 }
