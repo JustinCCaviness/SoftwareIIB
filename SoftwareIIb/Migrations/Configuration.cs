@@ -1,8 +1,8 @@
 ﻿namespace SoftwareIIb.Migrations
 {
     using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Migrations;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<SoftwareIIb.SchedulingSoftware>

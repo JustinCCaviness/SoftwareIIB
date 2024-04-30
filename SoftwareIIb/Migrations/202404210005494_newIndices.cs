@@ -1,26 +1,26 @@
 ﻿namespace SoftwareIIb.Migrations
 {
     using System;
-    using System.Data.Entity.Migrations;
+    using Microsoft.EntityFrameworkCore.Migrations;
     
-    public partial class newIndices : DbMigration
+    public partial class newIndices : Migration
     {
-        public override void Up()
+        protected override void Up(MigrationBuilder builder)
         {
-            CreateIndex(table: "appointment", column: "customerId", name: "IDX_customerId");
-            CreateIndex(table: "appointment", column: "userId", name: "IDX_userId");
-            CreateIndex(table: "customer", column: "addressId", name: "IDX_addressId");
-            CreateIndex(table: "address", column: "cityId", name: "IDX_cityId");
-            CreateIndex(table: "city", column: "countryId", name: "IDX_countryId");
+            builder.CreateIndex(table: "appointment", column: "customerId", name: "IDX_customerId");
+            builder.CreateIndex(table: "appointment", column: "userId", name: "IDX_userId");
+            builder.CreateIndex(table: "customer", column: "addressId", name: "IDX_addressId");
+            builder.CreateIndex(table: "address", column: "cityId", name: "IDX_cityId");
+            builder.CreateIndex(table: "city", column: "countryId", name: "IDX_countryId");
         }
 
-        public override void Down()
+        protected override void Down(MigrationBuilder builder)
         {
-            DropIndex(table: "appointment", name: "IDX_userId");
-            DropIndex(table: "appointment", name: "IDX_customerId");
-            DropIndex(table: "customer", name: "IDX_addressId");
-            DropIndex(table: "address", name: "IDX_cityId");
-            DropIndex(table: "city", name: "IDX_countryId");
+            builder.DropIndex(table: "appointment", name: "IDX_userId");
+            builder.DropIndex(table: "appointment", name: "IDX_customerId");
+            builder.DropIndex(table: "customer", name: "IDX_addressId");
+            builder.DropIndex(table: "address", name: "IDX_cityId");
+            builder.DropIndex(table: "city", name: "IDX_countryId");
         }
     }
 }

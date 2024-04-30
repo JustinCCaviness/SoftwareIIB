@@ -11,20 +11,20 @@ namespace SoftwareIIb
     internal class Authenticator
     {
         public static Authenticate authenticate;
-        public static bool last;
-        public static string currentUser = null;
+        public static bool authenticated;
+        public static user currentUser;
 
         public Authenticator()
         {
 
         }
 
-        public static void addDelegate(Authenticate auth)
+        public static void addHandler(Authenticate auth)
         {
             authenticate += auth;
         }
 
-        public static void removeDelegate(Authenticate auth)
+        public static void removeHandler(Authenticate auth)
         {
             authenticate -= auth;
         }

@@ -1,22 +1,28 @@
 namespace SoftwareIIb
 {
+    using Microsoft.EntityFrameworkCore;
+    using SoftwareIIb.DAL.Attributes;
     using SoftwareIIb.DAL.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("appointment")]
+    [Index(nameof(customerId), Name = "IDX_customerId")]
+    [Index(nameof(userId), Name = "IDX_userId")]
     public partial class appointment : AModel
     {
+        [NotMapped]
+        private DateTime _start;
+        [NotMapped]
+        private DateTime _end;
+
         [Key]
         public int appointmentId { get; set; }
 
-        [Index("IDX_customerId")]
         public int? customerId { get; set; }
 
-        [Index("IDX_userId")]
         public int? userId { get; set; }
 
         [Required]
@@ -38,9 +44,52 @@ namespace SoftwareIIb
         [StringLength(255)]
         public string url { get; set; }
 
-        public DateTime start { get; set; }
+        //[DateTimeKind(DateTimeKind.Utc)]
+        public DateTime start
+        {
+            get
+            {
+                return _start;
+                //switch (_start.Kind)
+                //{
+                //    case DateTimeKind.Unspecified:
+                //        _start = DateTime.SpecifyKind(_end, DateTimeKind.Utc);
+                //        break;
+                //}
+                //return _start.ToLocalTime();
+            }
+            set
+            {
+                _start = value;
+                //if (value.Kind == DateTimeKind.Unspecified)
+                //{
+                //    value = DateTime.SpecifyKind(value, DateTimeKind.Local);
+                //}
+                //_start = value.ToUniversalTime();
+            }
+        }
 
-        public DateTime end { get; set; }
+        //[DateTimeKind(DateTimeKind.Utc)]
+        public DateTime end {
+            get {
+                return _end;
+                //switch (_end.Kind)
+                //{
+                //    case DateTimeKind.Unspecified:
+                //        _end = DateTime.SpecifyKind(_end, DateTimeKind.Utc);
+                //        break;
+                //}
+                //return _end.ToLocalTime();
+            }
+            set {
+                _end = value;
+                //if (value.Kind == DateTimeKind.Unspecified)
+                //{
+                //    value = DateTime.SpecifyKind(value, DateTimeKind.Local);
+                //}
+                //_end = value.ToUniversalTime();
+            }
+        }
 
         [ForeignKey("customerId")]
         public virtual customer customer { get; set; }

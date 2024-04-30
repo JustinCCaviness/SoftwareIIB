@@ -1,13 +1,15 @@
 namespace SoftwareIIb
 {
+    using Microsoft.EntityFrameworkCore;
     using SoftwareIIb.DAL.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+    
 
     [Table("customer")]
+    [Index(nameof(addressId), Name = "IDX_addressId")]
     public partial class customer : AModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +25,6 @@ namespace SoftwareIIb
         [StringLength(45)]
         public string customerName { get; set; }
 
-        [Index("IDX_addressId")]
         public int? addressId { get; set; }
 
         public bool active { get; set; }

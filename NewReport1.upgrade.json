@@ -1,0 +1,310 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "",
+    "targetDisplayName": ".NET 8.0"
+  },
+  "analysisStartTime": "2024-04-29T05:38:24.6331422Z",
+  "analysisEndTime": "2024-04-29T05:38:27.5342393Z",
+  "stats": {
+    "summary": {
+      "projects": 1,
+      "issues": 4,
+      "incidents": 19,
+      "effort": 19
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 17,
+        "Optional": 0,
+        "Potential": 2,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 17,
+        "Project": 2
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+      "startingProject": true,
+      "issues": 4,
+      "storyPoints": 19,
+      "ruleInstances": [
+        {
+          "incidentId": "45ffa876-0d50-432e-adbd-240b3980ab9d",
+          "ruleId": "NuGet.0002",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "Microsoft.Extensions.Logging.Abstractions, 7.0.1",
+            "snippet": "Microsoft.Extensions.Logging.Abstractions, 7.0.1\n\nRecommendation:\n\nMicrosoft.Extensions.Logging.Abstractions 8.0.1"
+          }
+        },
+        {
+          "incidentId": "53f112c4-6cca-4141-9339-3f6a14450352",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Buffers, 4.5.1",
+            "snippet": "System.Buffers, 4.5.1\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "be4ee520-4c29-4722-82c9-98e85d7e06f9",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Globalization.Calendars, 4.3.0",
+            "snippet": "System.Globalization.Calendars, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "568b30f9-a55b-4751-b981-005b4868ecc2",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.IO, 4.3.0",
+            "snippet": "System.IO, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "cd6c28ff-c2fc-4c64-a45e-73dfed1958e6",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Memory, 4.5.5",
+            "snippet": "System.Memory, 4.5.5\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "944ba46b-38eb-48c9-a696-7af58859e346",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Net.Http, 4.3.4",
+            "snippet": "System.Net.Http, 4.3.4\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "3bafc2bf-ab05-4829-90b8-9d86bdec1007",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Numerics.Vectors, 4.5.0",
+            "snippet": "System.Numerics.Vectors, 4.5.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "0cd8e36a-3c9e-471a-851e-42e4109dfd0f",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Runtime, 4.3.0",
+            "snippet": "System.Runtime, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "1b38a890-1250-4045-b861-4fffe37b0f84",
+          "ruleId": "NuGet.0002",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Security.AccessControl, 6.0.1",
+            "snippet": "System.Security.AccessControl, 6.0.1\n\nRecommendation:\n\nSystem.Security.AccessControl 6.0.0"
+          }
+        },
+        {
+          "incidentId": "312b7f19-3089-4952-a4ab-f94bef8ab069",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Security.Cryptography.Algorithms, 4.3.0",
+            "snippet": "System.Security.Cryptography.Algorithms, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "fc25be21-7c52-49b2-9190-3efd7b1e9be2",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Security.Cryptography.Encoding, 4.3.0",
+            "snippet": "System.Security.Cryptography.Encoding, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "2f3a048c-a8b0-4b6f-aec9-11a3221bb63c",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Security.Cryptography.Primitives, 4.3.0",
+            "snippet": "System.Security.Cryptography.Primitives, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "a38795df-8a6c-4428-956c-13fba5a9d7e5",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Security.Cryptography.X509Certificates, 4.3.0",
+            "snippet": "System.Security.Cryptography.X509Certificates, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "3e19ec2f-e5f5-409b-a4c0-2fc85b6279db",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Security.Principal.Windows, 5.0.0",
+            "snippet": "System.Security.Principal.Windows, 5.0.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "d2124699-4165-4f91-836b-6b5b4ad55d56",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Text.RegularExpressions, 4.3.1",
+            "snippet": "System.Text.RegularExpressions, 4.3.1\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "25bf4a2c-9059-41f0-a785-93e29b1a02b8",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.Threading.Tasks.Extensions, 4.5.4",
+            "snippet": "System.Threading.Tasks.Extensions, 4.5.4\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "d8fc3e39-8b6c-48f4-b090-0e6ad38506cb",
+          "ruleId": "NuGet.0003",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "Package",
+            "path": "System.ValueTuple, 4.5.0",
+            "snippet": "System.ValueTuple, 4.5.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+          }
+        },
+        {
+          "incidentId": "48e0de04-d92f-4e93-a7b1-67b1835b9291",
+          "ruleId": "Project.0001",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj"
+          }
+        },
+        {
+          "incidentId": "9205fc76-da8c-4ae9-8124-ed81dade35aa",
+          "ruleId": "Project.0002",
+          "projectPath": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "C:\\Users\\chris\\source\\repos\\SoftwareIIB\\SoftwareIIb\\SoftwareIIb.csproj",
+            "snippet": "Current: .NETFramework,Version=v4.7.2\nNew: net8.0-windows"
+          }
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530"
+        }
+      ]
+    },
+    "NuGet.0003": {
+      "id": "NuGet.0003",
+      "description": "NuGet package functionality is included with framework refrence.\n\nPackage needs to be removed.",
+      "label": "NuGet package functionality is included with framework refrence",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262609"
+        }
+      ]
+    },
+    "Project.0001": {
+      "id": "Project.0001",
+      "description": "Project file needs to be converted to SDK style. Modern .NET framework projects require a change in the project file format and use SDK corresponding to project flavor and functionality.",
+      "label": "Project file needs to be converted to SDK style",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227"
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226"
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to correspinding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in moderrn .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227"
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226"
+        }
+      ]
+    }
+  }
+}

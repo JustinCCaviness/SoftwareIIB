@@ -2,8 +2,8 @@
 namespace SoftwareIIb.Migrations
 {
     using System.CodeDom.Compiler;
-    using System.Data.Entity.Migrations;
-    using System.Data.Entity.Migrations.Infrastructure;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]

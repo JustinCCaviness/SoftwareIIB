@@ -1,26 +1,26 @@
 ﻿namespace SoftwareIIb.Migrations
 {
     using System;
-    using System.Data.Entity.Migrations;
+    using Microsoft.EntityFrameworkCore.Migrations;
     
-    public partial class addForeignKeys : DbMigration
+    public partial class addForeignKeys : Migration
     {
-        public override void Up()
+        protected override void Up(MigrationBuilder builder)
         {
-            AddForeignKey("appointment", "customerId", "customer", "customerId");
-            AddForeignKey("appointment", "userId", "user", "userId");
-            AddForeignKey("customer", "addressId", "address", "addressId");
-            AddForeignKey("address", "cityId", "city", "cityId");
-            AddForeignKey("city", "countryId", "country", "countryId");
+            builder.AddForeignKey("appointment", "customerId", "customer", "customerId");
+            builder.AddForeignKey("appointment", "userId", "user", "userId");
+            builder.AddForeignKey("customer", "addressId", "address", "addressId");
+            builder.AddForeignKey("address", "cityId", "city", "cityId");
+            builder.AddForeignKey("city", "countryId", "country", "countryId");
         }
         
-        public override void Down()
+        protected override void Down(MigrationBuilder builder)
         {
-            DropForeignKey("appointment", "customerId", "customer");
-            DropForeignKey("appointment", "userId", "user");
-            DropForeignKey("customer", "addressId", "address");
-            DropForeignKey("address", "cityId", "city");
-            DropForeignKey("city", "countryId", "country");
+            builder.DropForeignKey("appointment", "customerId", "customer");
+            builder.DropForeignKey("appointment", "userId", "user");
+            builder.DropForeignKey("customer", "addressId", "address");
+            builder.DropForeignKey("address", "cityId", "city");
+            builder.DropForeignKey("city", "countryId", "country");
         }
     }
 }

@@ -1,15 +1,15 @@
 ﻿namespace SoftwareIIb.Migrations
 {
     using System;
-    using System.Data.Entity.Migrations;
+    using Microsoft.EntityFrameworkCore.Migrations;
     
-    public partial class requiredForeignKeys : DbMigration
+    public partial class requiredForeignKeys : Migration
     {
-        public override void Up()
+        protected override void Up(MigrationBuilder builder)
         {
         }
         
-        public override void Down()
+        protected override void Down(MigrationBuilder builder)
         {
         }
     }

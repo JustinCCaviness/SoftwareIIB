@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
+using System.Configuration;
 
 public partial class MainForm : Form
 {
@@ -51,37 +52,44 @@ public partial class MainForm : Form
         lblPassword.Text = resManager.GetString("LoginPasswordText", CultureInfo.CurrentCulture);   
         lblUsername.Text = resManager.GetString("LoginUserText", CultureInfo.CurrentCulture);
     }
+
+    private user fetchLoginUser(string u) {
+        return (new SchedulingSoftware(ConfigurationManager.ConnectionStrings["MySQL"].ConnectionString))
+            .users
+            .SingleOrDefault(
+                user => user.userName == u
+            );
+    }
     
     private void AddAuthentications()
     {
-        Authenticator.authenticate += (u, p) =>
+        Authenticator.addHandler((u, p) =>
         {
-            user cu = null;
-            if (Authenticator.last)
+            // user table search and match handler
+            Authenticator.currentUser = fetchLoginUser(u);
+            if (Authenticator.currentUser == null)
             {
-                Authenticator.currentUser = Authenticator.currentUser ?? u;
+                return Authenticator.authenticated;
             } else
             {
-                SchedulingSoftware sscontext = new SchedulingSoftware();
-                cu = sscontext.users.SingleOrDefault(user => user.userName == u && user.password == p);
-                Authenticator.currentUser = Authenticator.currentUser ?? (cu != null ? u : null);
+                return Authenticator.authenticated = Authenticator.authenticated || (Authenticator.authenticated = Authenticator.currentUser.password == p);
             }
-            return Authenticator.last || (Authenticator.last = cu != null);
-        };
-        Authenticator.authenticate += (u, p) =>
+        });
+        Authenticator.addHandler((u, p) =>
         {
-            if (Authenticator.last)
+            Authenticator.currentUser = fetchLoginUser(u);
+            if (Authenticator.currentUser == null)
             {
-                Authenticator.currentUser = Authenticator.currentUser ?? u;
+                return Authenticator.authenticated;
             } else
             {
-                Authenticator.currentUser = Authenticator.currentUser ?? (p == "ABC123" ? u : null);
+                return Authenticator.authenticated || (Authenticator.authenticated = p == "ABC123");
             }
-            return Authenticator.last || (Authenticator.last = p == "ABC123");
-        };
-        Authenticator.authenticate += (u, p) =>
+        });
+        Authenticator.addHandler((u, p) =>
         {
-            if (Authenticator.last)
+            // Add logging
+            if (Authenticator.authenticated)
             {
                 try
                 {
@@ -91,14 +99,15 @@ public partial class MainForm : Form
                     // do nothing if logfile.txt doesn't exist already
                 }
             }
-            return Authenticator.last;
-        };
+            return Authenticator.authenticated;
+        });
     }
     private void btnLogin_Click(object sender, EventArgs e)
     {
         // Assuming you have TextBox controls for username and password named txtUsername and txtPassword
         if (AuthenticateUser(txtUsername.Text, txtPassword.Text))
         {
+            //Authenticator.currentUser = txtUsername.Text;
             this.Hide();
             Form1 custform = new Form1();
             custform.ShowDialog();

@@ -1,26 +1,26 @@
 ﻿namespace SoftwareIIb.Migrations
 {
     using System;
-    using System.Data.Entity.Migrations;
+    using Microsoft.EntityFrameworkCore.Migrations;
     
-    public partial class nullableForeignKeys : DbMigration
+    public partial class nullableForeignKeys : Migration
     {
-        public override void Up()
+        protected override void Up(MigrationBuilder builder)
         {
-            AlterColumn("city", "countryId", c => c.Int(nullable: true));
-            AlterColumn("address", "cityId", c => c.Int(nullable: true));
-            AlterColumn("customer", "addressId", c => c.Int(nullable: true));
-            AlterColumn("appointment", "customerId", c=> c.Int(nullable: true));
-            AlterColumn("appointment", "userId", c => c.Int(nullable: true));
+            builder.AlterColumn("city", "countryId", c => c.Int(nullable: true));
+            builder.AlterColumn("address", "cityId", c => c.Int(nullable: true));
+            builder.AlterColumn("customer", "addressId", c => c.Int(nullable: true));
+            builder.AlterColumn("appointment", "customerId", c=> c.Int(nullable: true));
+            builder.AlterColumn("appointment", "userId", c => c.Int(nullable: true));
         }
 
-        public override void Down()
+        protected override void Down(MigrationBuilder builder)
         {
-            AlterColumn("city", "countryId", c => c.Int(nullable: false));
-            AlterColumn("address", "cityId", c => c.Int(nullable: false));
-            AlterColumn("customer", "addressId", c => c.Int(nullable: false));
-            AlterColumn("appointment", "customerId", c => c.Int(nullable: false));
-            AlterColumn("appointment", "userId", c => c.Int(nullable: false));
+            builder.AlterColumn("city", "countryId", c => c.Int(nullable: false));
+            builder.AlterColumn("address", "cityId", c => c.Int(nullable: false));
+            builder.AlterColumn("customer", "addressId", c => c.Int(nullable: false));
+            builder.AlterColumn("appointment", "customerId", c => c.Int(nullable: false));
+            builder.AlterColumn("appointment", "userId", c => c.Int(nullable: false));
         }
     }
 }
